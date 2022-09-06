@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Qcm index{% endblock %}
+
+{% block body %}
+    <h1>Qcm index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>createdAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for qcm in qcms %}
+            <tr>
+                <td>{{ qcm.id }}</td>
+                <td>{{ qcm.title }}</td>
+                <td>{{ qcm.description }}</td>
+                <td>{{ qcm.createdAt ? qcm.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_qcm_show', {'id': qcm.id}) }}">show</a>
+                    <a href="{{ path('app_qcm_edit', {'id': qcm.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_qcm_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Answers index{% endblock %}
+
+{% block body %}
+    <h1>Answers index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Answer1</th>
+                <th>Answer2</th>
+                <th>Answer3</th>
+                <th>Answer4</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for answer in answers %}
+            <tr>
+                <td>{{ answer.id }}</td>
+                <td>{{ answer.answer1 ? 'Yes' : 'No' }}</td>
+                <td>{{ answer.answer2 ? 'Yes' : 'No' }}</td>
+                <td>{{ answer.answer3 ? 'Yes' : 'No' }}</td>
+                <td>{{ answer.answer4 ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_answers_show', {'id': answer.id}) }}">show</a>
+                    <a href="{{ path('app_answers_edit', {'id': answer.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_answers_new') }}">Create new</a>
+{% endblock %}
