@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "Open ans";
+  src: url(/public/fonts/Open_Sans);
+}
+#footer {
+  background-color: #00437D;
+}
+
+* {
+  font-family: Open-sans;
+}
+
+footer {
+  background-color: #00437D;
+}
+
+/*# sourceMappingURL=global.css.map */
