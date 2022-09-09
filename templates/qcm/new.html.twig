@@ -3,9 +3,15 @@
 {% block title %}New Qcm{% endblock %}
 
 {% block body %}
-    <h1>Create new Qcm</h1>
+    {% if is_granted("ROLE_ADMIN") %}
+        <div class="uk-card uk-position-center uk-card-default uk-card-body uk-width-1-2@m">
+            <h1>Create new Qcm</h1>
 
-    {{ include('qcm/_form.html.twig') }}
+            {{ include('qcm/_form.html.twig') }}
 
-    <a href="{{ path('app_qcm_index') }}">back to list</a>
+            <a href="{{ path('app_qcm_index') }}">back to list</a>
+        </div>
+    {% else %}
+        <div><a href="{{ path('app_home') }}" class="uk-position-center">Je me suis perdu</a></div>
+    {% endif %}
 {% endblock %}

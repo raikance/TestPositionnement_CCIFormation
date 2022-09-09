@@ -61,6 +61,7 @@ p {
   height: auto;
   display: flex;
   justify-content: space-around;
+  padding: 1rem;
 
 }
 
@@ -90,6 +91,15 @@ p {
   text-decoration: none !important;
 }
 
+button{
+  background: none;
+  border: none;
+  color: white;
+}
+button:hover {
+  text-decoration: #FFFFFF;
+}
+
 .btn-red {
   background: #F3004E;
   width: 6rem;
@@ -98,7 +108,7 @@ p {
   color: white !important;
   text-align: center;
   display: inline-block;
-  padding: 0.5rem 1rem 0rem 1rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
 }
 
 .btn-blue {

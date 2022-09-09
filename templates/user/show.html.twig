@@ -3,32 +3,34 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="uk-card uk-position-center uk-card-default uk-card-body uk-width-1-2@m">
+        <h1>Mon profil</h1>
 
-    <a href="{{ path('app_user_index') }}">back to list</a>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ user.nom }}</td>
+                </tr>
+                <tr>
+                    <th>Prénom</th>
+                    <td>{{ user.prenom }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="btn-rc"></div>
+        {% if is_granted("ROLE_ADMIN") %}
+        <a class="btn-blue bg-blue" href="{{ path('app_user_index') }}">Back to list</a>
 
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+        <a class="btn-blue bg-blue" href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+        <a class="btn-red bg-red style-unset">{{ include('user/_delete_form.html.twig') }}</a>
+        {% endif %}
 
-    {{ include('user/_delete_form.html.twig') }}
+    </div>
+
 {% endblock %}
