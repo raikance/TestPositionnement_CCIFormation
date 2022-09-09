@@ -21,24 +21,74 @@
 
     <body>
     {% block main %}
-        {{ include('components/header.html.twig') }}
+        <nav class="uk-navbar-container" uk-navbar>
+            <div class="uk-navbar-left">
+
+                <ul class="uk-navbar-nav">
+                    <li class="uk-active">
+                        <a href="{{ path("app_home") }}">
+                            <img src="{{ asset("images/New_Logo_CCIF_rouge.png") }}">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">Parent</a>
+                        <div class="uk-navbar-dropdown">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li class="uk-nav-header">Header</li>
+                                <li><a href="#">Item</a></li>
+                                <li><a href="#">Item</a></li>
+                                <li class="uk-nav-divider"></li>
+                                <li><a href="#">Item</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="#">Item</a></li>
+                </ul>
+
+            </div>
+            <div class="uk-navbar-right">
+
+                <ul class="uk-navbar-nav">
+                    <li>
+                        <a href="{{ path("app_home") }}" >
+                            <img id="profil-icon" src="{{ asset("icons/circle-user-solid.png") }}"></img>
+                        </a>
+                        <div class="uk-navbar-dropdown">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li class="uk-active"><a href="#">Active</a></li>
+                                <li><a href="#">Item</a></li>
+                                <li class="uk-nav-header">Header</li>
+                                <li><a href="#">Item</a></li>
+                                <li><a href="#">Item</a></li>
+                                <li class="uk-nav-divider"></li>
+                                <li><a href="#">Item</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     {% endblock %}
 
         {% block body %}
+
             {% block nav %}
-
-
-
             {% endblock %}
+
             {% block contenu %}
-
-
-
             {% endblock %}
+
         {% endblock %}
 
     {% block footer %}
-        {{ include('components/footer.html.twig') }}
+        <footer id="footer" class="uk-position-bottom uk-position-z-index">
+            <div class="uk-position-center">
+                <a href="{{ path("app_home") }}">
+                    <img id="logoWhite" src="{{ asset("images/New_Logo_CCIF_rouge.png") }}">
+                </a>
+            </div>
+        </footer>
     {% endblock %}
+
     </body>
 </html>

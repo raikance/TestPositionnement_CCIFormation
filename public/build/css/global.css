@@ -1,17 +1,47 @@
 @font-face {
-  font-family: "Open ans";
+  font-family: "Open-sans";
   src: url(/public/fonts/Open_Sans);
-}
-#footer {
-  background-color: #00437D;
 }
 
 * {
   font-family: Open-sans;
 }
 
+.uk-navbar-container {
+  background-color: white !important;
+  box-shadow: -14px -8px 30px 3px #00437d;
+  padding: 1rem;
+
+}
+
+#profil-icon {
+  width: 2rem;
+  filter: invert(15%) sepia(91%) saturate(5649%) hue-rotate(336deg) brightness(93%) contrast(87%)
+}
+
+.bg-gradient {
+  color: white;
+  display: flex;
+  height: 500px;
+  background: linear-gradient(90deg, #607DA6 16.67%, rgba(96, 125, 166, 0) 100%), #E76788;
+}
+
+.example-wrapper {
+  position: absolute;
+  width: 588px;
+  height: 374px;
+  align-items: center;
+  justify-content: center;
+}
+
 footer {
+  height: 2rem;
+  padding: 5rem;
   background-color: #00437D;
+}
+
+#logoWhite {
+  filter:  brightness(0) invert(1)
 }
 
 /*# sourceMappingURL=global.css.map */
