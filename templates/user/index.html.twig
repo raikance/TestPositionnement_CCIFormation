@@ -3,37 +3,40 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
+    {% if is_granted("ROLE_ADMIN") %}
+        <div class="uk-position-medium uk-position-center uk-card">
+        <h1>User index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
-                <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <table class="uk-table uk-table-justify uk-table-divider">
+            <thead>
+                <tr class="uk-width-small">
+                    <th>Id</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                    <td>
+                        <a class="uk-button uk-button-default" type="button" href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+                        <a class="uk-button uk-button-default" type="button" href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
 
     <a href="{{ path('app_user_new') }}">Create new</a>
+    </div>
+    {% endif%}
 {% endblock %}

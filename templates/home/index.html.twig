@@ -8,9 +8,25 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }**/
 </style>
 <div class="bg-gradient">
-    <div class="example-wrapper">
-        <h3 class="example-wrapper">Bienvenue</h3>
-
+    <div class="uk-position-medium uk-position-center uk-overlay uk-overlay-default">
+        {% if is_granted("ROLE_USER") %}
+            <h3>Bienvenue, {{ app.user.prenom }} {{ app.user.nom }}</h3>
+            <div class="btn-gb"><a class="style-unset" href="{{ path('app_user_show', {'id': app.user.id}) }}">Mon profil</a></div>
+            <div class="btn-gb"><a href="{{ path("app_qcm_index") }}" class="style-unset">Les QCMs</a></div>
+            {% if is_granted("ROLE_ADMIN") %}
+                <div class="btn-gb"><a class="style-unset" href="{{ path('app_qcm_new') }}">Créer un QCM</a></div>
+                <div class="btn-gb"><a class="style-unset" href="{{ path('app_user_index') }}">Liste des utilisateurs</a></div>
+            {% endif %}
+            <div class="btn-gb bg-blue"><a class="style-unset" href="https://www.cciformationpro.fr/">CCI Formation <br>Lyon, Saint-Étienne, Roanne</a></div>
+            <div class="btn-gb bg-red"><a class="style-unset" href="{{ path("app_logout") }}">Deconnexion</a></div>
+        {% else %}
+            <h3>Bienvenue</h3>
+            <p>Connectez-vous ou créez votre compte pour accéder à votre espace personnel et passer le test</p>
+            <div class="btn-rc">
+                <a class="btn-red" href="{{ path("app_register") }}">Inscription</a>
+                <a class="btn-blue" href="{{ path("app_login") }}">Connexion</a>
+            </div>
+        {%  endif %}
     </div>
 
 </div>

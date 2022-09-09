@@ -4,7 +4,7 @@
 }
 
 * {
-  font-family: Open-sans;
+  font-family: Avenir !important;
 }
 
 .uk-navbar-container {
@@ -20,9 +20,9 @@
 }
 
 .bg-gradient {
-  color: white;
   display: flex;
   height: 500px;
+  padding-bottom: 2rem;
   background: linear-gradient(90deg, #607DA6 16.67%, rgba(96, 125, 166, 0) 100%), #E76788;
 }
 
@@ -33,6 +33,85 @@
   align-items: center;
   justify-content: center;
 }
+
+.uk-overlay-default {
+  background: rgba(255,255,255,.3) !important;
+  /* opacity: 0.5; */
+  width: auto;
+}
+
+.uk-position-center {
+  border-radius: 5px;
+  height: auto;
+  width: auto;
+}
+
+h3 {
+  text-align: center;
+  color: white !important;
+}
+
+p {
+  text-align: center;
+  color: white !important;
+}
+
+.btn-rc {
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.btn-gb {
+  display: flex;
+  justify-content: center;
+  background: #E0EFF7;
+  border-radius: 5px;
+  color: #00437D;
+  margin-top: 1rem;
+  text-align: center;
+  padding: 0.5rem 0.5rem 0.5rem 0.3rem;
+}
+
+.bg-red {
+  background: #F3004E;
+  color: white !important;
+}
+
+.bg-blue {
+  background: #00437D;
+  color: white !important;
+}
+
+.style-unset {
+  color: unset;
+  text-decoration: none !important;
+}
+
+.btn-red {
+  background: #F3004E;
+  width: 6rem;
+  height: auto;
+  border-radius: 5px;
+  color: white !important;
+  text-align: center;
+  display: inline-block;
+  padding: 0.5rem 1rem 0rem 1rem;
+}
+
+.btn-blue {
+  background: #00437D;
+  width: 6rem;
+  height: 2rem;
+  border-radius: 5px;
+  color: white !important;
+  text-align: center;
+  display: inline-block;
+  padding: 0.5rem 1rem 0rem 1rem;
+}
+
 
 footer {
   height: 2rem;

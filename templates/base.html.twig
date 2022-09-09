@@ -30,19 +30,6 @@
                             <img src="{{ asset("images/New_Logo_CCIF_rouge.png") }}">
                         </a>
                     </li>
-                    <li>
-                        <a href="#">Parent</a>
-                        <div class="uk-navbar-dropdown">
-                            <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li class="uk-nav-header">Header</li>
-                                <li><a href="#">Item</a></li>
-                                <li><a href="#">Item</a></li>
-                                <li class="uk-nav-divider"></li>
-                                <li><a href="#">Item</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li><a href="#">Item</a></li>
                 </ul>
 
             </div>
@@ -55,13 +42,18 @@
                         </a>
                         <div class="uk-navbar-dropdown">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li class="uk-active"><a href="#">Active</a></li>
-                                <li><a href="#">Item</a></li>
-                                <li class="uk-nav-header">Header</li>
-                                <li><a href="#">Item</a></li>
-                                <li><a href="#">Item</a></li>
-                                <li class="uk-nav-divider"></li>
-                                <li><a href="#">Item</a></li>
+                                {% if is_granted("ROLE_ADMIN") %}
+                                    <li><a href="{{ path('app_qcm_new') }}">Créer un QCM</a></li>
+                                {% endif %}
+                                {% if is_granted("ROLE_USER") %}
+                                    <li class="uk-active"><a href="{{ path('app_user_show', {'id': app.user.id}) }}">Mon profil</a></li>
+                                    <li><a href="{{ path("app_qcm_index") }}" class="uk-nav-header">Les QCMs</a></li>
+                                    <li class="uk-nav-divider"></li>
+                                    <li><a href="{{ path("app_logout") }}">Me déconnecter</a></li>
+                                {% else %}
+                                    <li><a href="{{ path("app_login") }}">Me connecter</a></li>
+                                    <li><a href="{{ path("app_register") }}">M'inscrire</a></li>
+                                {% endif %}
                             </ul>
                         </div>
                     </li>

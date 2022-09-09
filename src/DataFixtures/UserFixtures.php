@@ -27,8 +27,8 @@ class UserFixtures extends Fixture implements IRoles
             "raikette"
             )
         );
-        $user->setNom("NomFam");
-        $user->setPrenom("Jean");
+        $user->setNom("Konan");
+        $user->setPrenom("Amandine");
         $user->addRoles(self::ROLE_ADMIN);
         $manager->persist($user);
         $this->addReference("ADMIN", $user);
