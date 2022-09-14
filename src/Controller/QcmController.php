@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Qcm;
+use App\Entity\Question;
 use App\Form\QcmType;
+use App\Form\QuestionType;
 use App\Repository\QcmRepository;
+use App\Repository\QuestionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,27 +24,38 @@ class QcmController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_qcm_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, QcmRepository $qcmRepository): Response
+    #[Route('/new', name: 'app_qcm_new', methods: ['GET', 'gitPOST'])]
+    public function new(Request $request, QcmRepository $qcmRepository, QuestionRepository $questionRepository): Response
     {
         //dd();
-        $qcm = new Qcm();
-        $form = $this->createForm(QcmType::class, $qcm);
-        $form->handleRequest($request);
+        $qcm1 = new Qcm();
+        $question = new Question();
+        $form1 = $this->createForm(QcmType::class, $qcm1);
+        $form2 = $this->createForm(QuestionType::class, $question);
+        $form1->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+
+        if ($form1->isSubmitted() && $form1->isValid()) {
             if($this->getUser() != null)
             {
-                $qcm->setIdUser($this->getUser());
+                $qcm1->setIdUser($this->getUser());
             }
-            $qcmRepository->add($qcm, true);
+            $qcmRepository->add($qcm1, true);
+
+            return $this->redirectToRoute('app_qcm_index', [], Response::HTTP_SEE_OTHER);
+        }
+        $form2->handleRequest($request);
+        if ($form2->isSubmitted() && $form2->isValid()) {
+
+            $questionRepository->add($question, true);
 
             return $this->redirectToRoute('app_qcm_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('qcm/new.html.twig', [
-            'qcm' => $qcm,
-            'form' => $form,
+
+            'form1' => $form1,
+            'form2' => $form2,
         ]);
     }
 

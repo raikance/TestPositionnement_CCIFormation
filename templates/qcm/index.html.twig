@@ -3,10 +3,10 @@
 {% block title %}Qcm index{% endblock %}
 
 {% block body %}
-    <div class="uk-card uk-position-center uk-card-default uk-card-body uk-width-1-2@m">
+    <div class="uk-card uk-card-default uk-position-center uk-card-body">
         <h1>La liste des QCM</h1>
 
-        <table class="uk-table uk-table-justify uk-table-divider">
+        <table class="uk-table uk-table-responsive">
             <thead>
                 <tr class="uk-width-small">
                     {% if is_granted("ROLE_ADMIN") %}
