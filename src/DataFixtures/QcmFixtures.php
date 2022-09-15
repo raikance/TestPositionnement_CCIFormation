@@ -33,7 +33,7 @@ class QcmFixtures extends Fixture implements DependentFixtureInterface, IRoles
         $qcm->setIdUser($this->getReference("ADMIN"));
         //$qcm->setIdUser($this->getReference(UserFixtures::ROLE_ADMIN)->getIdUser());
         $manager->persist($qcm);
-        $this->addReference("QCM1", $qcm);
+        $this->addReference("qcm", $qcm);
 
         $manager->flush();
     }

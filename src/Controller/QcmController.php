@@ -4,8 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Qcm;
 use App\Entity\Question;
+use App\Entity\Answers;
+use App\Form\AnswersType;
 use App\Form\QcmType;
 use App\Form\QuestionType;
+use App\Repository\AnswersRepository;
 use App\Repository\QcmRepository;
 use App\Repository\QuestionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,26 +27,29 @@ class QcmController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_qcm_new', methods: ['GET', 'gitPOST'])]
-    public function new(Request $request, QcmRepository $qcmRepository, QuestionRepository $questionRepository): Response
+    #[Route('/new', name: 'app_qcm_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, QcmRepository $qcmRepository, QuestionRepository $questionRepository, AnswersRepository $answersRepository): Response
     {
         //dd();
-        $qcm1 = new Qcm();
+        $qcm = new Qcm();
         $question = new Question();
-        $form1 = $this->createForm(QcmType::class, $qcm1);
+        $answers = new Answers();
+        $form1 = $this->createForm(QcmType::class, $qcm);
         $form2 = $this->createForm(QuestionType::class, $question);
+        $form3 = $this->createForm(AnswersType::class, $answers);
         $form1->handleRequest($request);
 
 
         if ($form1->isSubmitted() && $form1->isValid()) {
             if($this->getUser() != null)
             {
-                $qcm1->setIdUser($this->getUser());
+                $qcm->setIdUser($this->getUser());
             }
-            $qcmRepository->add($qcm1, true);
+            $qcmRepository->add($qcm, true);
 
             return $this->redirectToRoute('app_qcm_index', [], Response::HTTP_SEE_OTHER);
         }
+
         $form2->handleRequest($request);
         if ($form2->isSubmitted() && $form2->isValid()) {
 
@@ -52,10 +58,19 @@ class QcmController extends AbstractController
             return $this->redirectToRoute('app_qcm_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        $form3->handleRequest($request);
+        if ($form3->isSubmitted() && $form3->isValid()) {
+
+            $answersRepository->add($answers, true);
+
+            return $this->redirectToRoute('app_qcm_index', [], Response::HTTP_SEE_OTHER);
+        }
+
         return $this->renderForm('qcm/new.html.twig', [
 
             'form1' => $form1,
             'form2' => $form2,
+            'form3' => $form3,
         ]);
     }
 

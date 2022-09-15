@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Test de Positionnement{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🔴️</text></svg>">
         <link rel="stylesheet" href="{{ asset("build/css/global.css")}}" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.6/dist/css/uikit.min.css" />
@@ -21,16 +21,66 @@
     </head>
 
     <body>
+    {% block main %}
+        <nav class="uk-navbar-container uk-position-top uk-position-fixed">
+            <div class="uk-navbar-left">
+
+                <ul class="uk-navbar-nav">
+                    <li class="uk-active">
+                        <a href="{{ path("app_home") }}">
+                            <img src="{{ asset("images/New_Logo_CCIF_rouge.png") }}">
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="uk-navbar-right">
+
+                <ul class="uk-navbar-nav">
+                    <li>
+                        <a href="{{ path("app_home") }}" >
+                            <img id="profil-icon" src="{{ asset("icons/circle-user-solid.png") }}"></img>
+                        </a>
+                        <div uk-dropdown>
+                            <ul class="uk-nav uk-dropdown-nav">
+                                {% if is_granted("ROLE_USER") %}
+                                    <li class="uk-active"><a href="{{ path('app_user_show', {'id': app.user.id}) }}">Mon profil</a></li>
+                                    <li><a href="{{ path("app_qcm_index") }}">Les QCMs</a></li>
+                                    {% if is_granted("ROLE_ADMIN") %}
+                                        <li><a href="{{ path('app_qcm_new') }}">Créer un QCM</a></li>
+                                    {% endif %}
+                                    <li class="uk-nav-divider"></li>
+                                    <li><a href="{{ path("app_logout") }}">Me déconnecter</a></li>
+                                {% else %}
+                                    <li><a href="{{ path("app_login") }}">Me connecter</a></li>
+                                    <li><a href="{{ path("app_register") }}">M'inscrire</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        {% for message in app.flashes('success') %}
+
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+    {% endblock %}
 
 
-        {% block body %}
+    {% block body %}
+        <div class="uk-container-center">
 
             {% block nav %}
             {% endblock %}
 
             {% block contenu %}
             {% endblock %}
-
+        </div>git
         {% endblock %}
 
     {% block footer %}

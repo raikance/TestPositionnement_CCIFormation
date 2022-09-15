@@ -24,7 +24,7 @@ class QuestionFixtures extends Fixture implements DependentFixtureInterface
         $question->setAnswer2("White");
         $question->setAnswer3("Black");
         $question->setAnswer4("Brown");
-        $question->setIdQcm($this->getReference("QCM1"));
+        $question->setIdQcm($this->getReference("qcm"));
         $manager->persist($question);
 
         $manager->flush();
