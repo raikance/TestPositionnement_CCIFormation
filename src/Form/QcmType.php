@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Qcm;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,6 +15,15 @@ class QcmType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
+            ->add('questions', CollectionType::class, [
+                'entry_type' => QuestionType::class,
+                'entry_options' => [
+                    'label' => false
+                ],
+                'by_reference' => false,
+                'allow_add' => true,
+                'allow_delete' => true
+            ])
 
         ;
     }

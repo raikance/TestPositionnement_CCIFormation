@@ -1,4 +1,9 @@
-{{ form_start(form1) }}
-    {{ form_widget(form1) }}
-    <button class="btn-red">{{ button_label|default('Créer le QCM') }}</button>
-{{ form_end(form1) }}
+{{ form_start(form) }}
+    {{ form_row(form) }}
+    <div data-prototype="{{ form_widget(form.question.vars.prototype) }}">
+        {% for row in form.question %}
+            {{ form_row(row) }}
+        {% endfor %}
+        <button class="btn-red">{{ button_label|default('Créer le QCM') }}</button>
+    </div>
+{{ form_end(form) }}
