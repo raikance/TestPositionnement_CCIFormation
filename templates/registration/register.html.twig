@@ -1,25 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Créer mon compte{% endblock %}
 
 {% block body %}
-    <div class="uk-card uk-card-default uk-position-center uk-card-body">
-        <h1>Créer mon compte</h1>
-        <h2>Merci de remplir tous les champs du formulaire ci-dessous</h2>
+    <div class="bg-gradient">
+        <div class="uk-card uk-card-default uk-position-center uk-card-body">
+            <h1>Créer mon compte</h1>
+            <h2>Merci de remplir tous les champs du formulaire ci-dessous</h2>
 
-        <form class="uk-table uk-table-responsive">
-            {{ form_start(registrationForm) }}
-                {{ form_row(registrationForm.nom, {'label' : "Nom", 'attr': {'class' :'uk-input'}}) }}
-                {{ form_row(registrationForm.prenom, {'label' : "Prénom", 'attr': {'class' :'uk-input'}}) }}
-                {{ form_row(registrationForm.email, {'label' : "Email", 'attr': {'class' :'uk-input'}}) }}
-                {{ form_row(registrationForm.plainPassword, {
-                    label: 'Password',
-                    'attr': {'class' :'uk-input'}
-                }) }}
-                {{ form_row(registrationForm.agreeTerms) }}
-
-                <button type="submit" class="btn">Register</button>
-            {{ form_end(registrationForm) }}
-        </form>
+            <form class=" uk-table-responsive">
+                {{ form_start(registrationForm) }}
+                    {{ form_row(registrationForm.nom, {'label' : "Nom", 'attr': {'class' :'uk-input'}}) }}
+                    {{ form_row(registrationForm.prenom, {'label' : "Prénom", 'attr': {'class' :'uk-input'}}) }}
+                    {{ form_row(registrationForm.email, {'label' : "Email", 'attr': {'class' :'uk-input'}}) }}
+                    {{ form_row(registrationForm.plainPassword, {
+                        label: 'Password',
+                        'attr': {'class' :'uk-input'}
+                    }) }}
+                    {{ form_row(registrationForm.agreeTerms) }}
+                    <div class="btn-rc uk-position-bottom-right">
+                        <button type="submit" class="btn-red">Register</button>
+                    </div>
+                {{ form_end(registrationForm) }}
+            </form>
+        </div>
     </div>
 {% endblock %}

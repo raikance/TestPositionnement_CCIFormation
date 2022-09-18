@@ -3,10 +3,11 @@
 {% block title %}Qcm{% endblock %}
 
 {% block body %}
-    <h1>Qcm</h1>
+    <div style="maragin-top: 9rem; margin-bottom: 10rem" class="uk-card uk-card-default uk-card-body uk-position-center">
+        <h1>{{ qcm.title }}</h1>
 
-    <table class="table">
-        <tbody>
+        <table class="uk-card uk-card-body uk-card-responsive">
+            <tbody class="uk-card">
             <tr>
                 <th>Id</th>
                 <td>{{ qcm.id }}</td>
@@ -23,12 +24,12 @@
                 <th>createdAt</th>
                 <td>{{ qcm.createdAt ? qcm.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_qcm_index') }}">back to list</a>
-
-    <a href="{{ path('app_qcm_edit', {'id': qcm.id}) }}">edit</a>
-
-    {{ include('qcm/_delete_form.html.twig') }}
+            </tbody>
+        </table>
+        <div class="btn-rc uk-position-bottom-right">
+            <a class="btn-red" type="button" href="{{ path('app_qcm_index') }}">back to list</a>
+            <a class="btn-blue" type="button" href="{{ path('app_qcm_edit', {'id': qcm.id}) }}">edit</a>
+        </div>
+        {{ include('qcm/_delete_form.html.twig') }}
+    </div>
 {% endblock %}
