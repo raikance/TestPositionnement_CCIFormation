@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Answers;
 use App\Entity\Qcm;
 use App\Entity\Question;
+use App\Form\AnswersType;
 use App\Form\QcmType;
 use App\Form\QuestionType;
+use App\Repository\AnswersRepository;
 use App\Repository\QcmRepository;
 use App\Repository\QuestionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,29 +28,51 @@ class QcmController extends AbstractController
     }
 
     #[Route('/new', name: 'app_qcm_new', methods: ['GET', 'gitPOST'])]
-    public function new(Request $request, QcmRepository $qcmRepository, QuestionRepository $questionRepository): Response
+    public function new(Request $request, QcmRepository $qcmRepository, QuestionRepository $questionRepository, AnswersRepository $answersRepository): Response
     {
         //dd();
-        $qcm1 = new Qcm();
+        $qcm = new Qcm();
         $question = new Question();
-        $form1 = $this->createForm(QcmType::class, $qcm1);
+        $answers = new Answers();
+        $form1 = $this->createForm(QcmType::class, $qcm);
         $form2 = $this->createForm(QuestionType::class, $question);
+        $form3 = $this->createForm(AnswersType::class, $answers);
         $form1->handleRequest($request);
 
 
         if ($form1->isSubmitted() && $form1->isValid()) {
             if($this->getUser() != null)
             {
-                $qcm1->setIdUser($this->getUser());
+                $entityManager = $this->getDoctrine()->getManager();
+                $qcm->setIdUser($this->getUser());
+
+                $entityManager->persist($qcm);
+                $entityManager->flush();
             }
-            $qcmRepository->add($qcm1, true);
+            $qcmRepository->add($qcm, true);
 
             return $this->redirectToRoute('app_qcm_index', [], Response::HTTP_SEE_OTHER);
         }
         $form2->handleRequest($request);
         if ($form2->isSubmitted() && $form2->isValid()) {
-
+            $entityManager = $this->getDoctrine()->getManager();
             $questionRepository->add($question, true);
+
+            $entityManager->persist($question);
+            $entityManager->flush();
+
+
+            return $this->redirectToRoute('app_qcm_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        $form3->handleRequest($request);
+        if ($form3->isSubmitted() && $form3->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $answersRepository->add($answers, true);
+
+            $entityManager->persist($question);
+            $entityManager->flush();
+            $answersRepository->add($answers, true);
 
             return $this->redirectToRoute('app_qcm_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -56,6 +81,7 @@ class QcmController extends AbstractController
 
             'form1' => $form1,
             'form2' => $form2,
+            'form3' => $form3,
         ]);
     }
 

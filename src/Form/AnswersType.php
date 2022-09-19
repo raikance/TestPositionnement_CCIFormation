@@ -14,10 +14,17 @@ class AnswersType extends AbstractType
     {
         $builder
             ->add('answer1', CheckboxType::class,[
-                'label' => 'LA TU METS CE QUE TU VEUX'])
-            ->add('answer2')
-            ->add('answer3')
-            ->add('answer4')
+                'label' => 'réponse 1'])
+            ->add('answer2', CheckboxType::class,[
+                'label' => 'réponse 2'
+            ])
+            ->add('answer3', CheckboxType::class,[
+                'label' => 'réponse 3'
+            ])
+            ->add('answer4', CheckboxType::class,[
+                'label' => 'réponse 4'
+            ])
+
         ;
     }
 

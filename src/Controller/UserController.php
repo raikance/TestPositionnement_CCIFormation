@@ -13,6 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/user')]
 class UserController extends AbstractController
 {
+    private $passwordEncoder;
+
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
@@ -29,14 +31,21 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $userRepository->add($user, true);
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $plainPassword = $user->getPassword();
+            $encoded = $this->passwordEncoder->encodePassword($user, $plainPassword);
+            $user->setPassword($encoded);
+
+            $entityManager->persist($user);
+            $entityManager->flush();
 
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('user/new.html.twig', [
+        return $this->render('user/new.html.twig', [
             'user' => $user,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -55,7 +64,14 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $userRepository->add($user, true);
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $plainPassword = $user->getPassword();
+            $encoded = $this->passwordEncoder->encodePassword($user, $plainPassword);
+            $user->setPassword($encoded);
+
+            $entityManager->persist($user);
+            $entityManager->flush();
 
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
