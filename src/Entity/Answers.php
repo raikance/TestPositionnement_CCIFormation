@@ -5,8 +5,10 @@ namespace App\Entity;
 use App\Repository\AnswersRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+
+
 #[ORM\Entity(repositoryClass: AnswersRepository::class)]
-class Answers
+class Answers extends \App\Entity\Qcm
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -93,4 +95,5 @@ class Answers
 
         return $this;
     }
+
 }
