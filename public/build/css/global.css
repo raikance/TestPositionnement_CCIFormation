@@ -1,10 +1,5 @@
-@font-face {
-  font-family: "Open-sans";
-  src: url(/public/fonts/Open_Sans);
-}
-
 * {
-  font-family: Open-sans !important;
+  font-family: 'Open-sans', sans-serif !important;
 }
 
 
