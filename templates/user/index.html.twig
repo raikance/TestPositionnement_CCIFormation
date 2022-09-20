@@ -3,44 +3,46 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    {% if is_granted("ROLE_ADMIN") %}
-        <div class="uk-card uk-card-default uk-position-center uk-card-body">
-        <h1>User index</h1>
+    <div class="bg-gradient">
+        {% if is_granted("ROLE_ADMIN") %}
+            <div class="uk-card uk-card-default uk-position-center uk-card-body">
+            <h1>User index</h1>
 
-        <table class="uk-table uk-table-responsive">
-            <thead>
-                <tr class="uk-width-small">
-                    <th>Id</th>
-                    <th>Email</th>
-                    <th>Prénom</th>
-                    <th>Nom</th>
-                    <th>Roles</th>
-                    <th>actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for user in users %}
-                <tr>
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.nom }}</td>
-                    <td>{{ user.prenom }}</td>
-                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                    <td>
-                        <a class="btn-blue" type="button" href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                        <a class="btn-blue" type="button" href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="5">no records found</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+            <table class="uk-table uk-table-responsive">
+                <thead>
+                    <tr class="uk-width-small">
+                        <th>Id</th>
+                        <th>Email</th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Roles</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.nom }}</td>
+                        <td>{{ user.prenom }}</td>
+                        <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                        <td>
+                            <a class="btn-blue" type="button" href="{{ path('app_user_show', {'id': user.id}) }}">Profil</a>
+                            <a class="btn-blue" type="button" href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
 
 
-    <a class="btn-red" href="{{ path('app_user_new') }}">Créer un nouvel utilisateur</a>
+        <a class="btn-red" href="{{ path('app_user_new') }}">Créer un nouvel utilisateur</a>
+        </div>
     </div>
     {% endif%}
 {% endblock %}

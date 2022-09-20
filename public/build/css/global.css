@@ -1,10 +1,14 @@
-@font-face {
-  font-family: "Open-sans";
-  src: url(/public/fonts/Open_Sans);
+* {
+  font-family: 'Open-sans', sans-serif !important;
 }
 
-* {
-  font-family: Open-sans !important;
+
+.footer-ns{
+  width: 100%;
+
+}
+img {
+  width: 9rem;
 }
 
 .uk-navbar-container {
@@ -92,11 +96,13 @@ p {
 
 .bg-red {
   background: #F3004E;
+  padding: 0.5rem 0.5rem 0.5rem 0.3rem;
   color: white !important;
 }
 
 .bg-blue {
   background: #00437D;
+  padding: 0.5rem 0.5rem 0.5rem 0.3rem;
   color: white !important;
 }
 
@@ -138,7 +144,7 @@ button:hover {
 
 
 footer {
-  padding: 5rem;
+  padding: 4rem;
   background-color: #00437D;
 }
 

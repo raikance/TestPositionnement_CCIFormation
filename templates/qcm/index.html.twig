@@ -3,49 +3,38 @@
 {% block title %}Qcm index{% endblock %}
 
 {% block body %}
-    <div class="uk-card uk-card-default uk-position-center uk-card-body">
-        <h1>La liste des QCM</h1>
+    <div class="bg-gradient">
+        <div style="padding-top: 9rem; padding-bottom: 10rem" class="uk-card uk-card-body uk-card-default uk-card-center uk-position-center">
+            <h1>La liste des QCM</h1>
 
-        <table class="uk-table uk-table-responsive">
-            <thead>
-                <tr class="uk-width-small">
-                    {% if is_granted("ROLE_ADMIN") %}
-                    <th>Id</th>
-                    {% endif %}
-                    <th>Titre</th>
-                    <th>Description</th>
-                    {% if is_granted("ROLE_ADMIN") %}
-                    <th>Créé le</th>
-                    {% endif %}
-                    <th>actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for qcm in qcms %}
-                <tr>
-                    {% if is_granted("ROLE_ADMIN") %}
-                    <td>{{ qcm.id }}</td>
-                    {% endif %}
-                    <td>{{ qcm.title }}</td>
-                    <td>{{ qcm.description }}</td>
-                    <td>{{ qcm.createdAt ? qcm.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>
-                        <a class="btn-blue" type="button" href="{{ path('app_qcm_show', {'id': qcm.id}) }}">show</a>
+            <table class="uk-card uk-card-body uk-table-responsive">
+                <tbody>
+                {% for qcm in qcms %}
+                    <tr class="uk-card uk-card-body uk-card-hover uk-card-default">
                         {% if is_granted("ROLE_ADMIN") %}
-                        <a class="btn-blue" type="button" href="{{ path('app_qcm_edit', {'id': qcm.id}) }}">edit</a>
+                        <td><strong>Id:</strong> {{ qcm.id }}</td>
                         {% endif %}
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="5">no records found</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        {% if is_granted("ROLE_ADMIN") %}
-        <a class="btn-red" href="{{ path('app_qcm_new') }}">Créer un QCM</a>
-        {% endif %}
+                        <td><strong>Titre QCM:</strong> {{ qcm.title }}</td>
+                        <td><strong>Description QCM:</strong> {{ qcm.description }}</td>
+                        <td><strong>Créé le:</strong> {{ qcm.createdAt ? qcm.createdAt|date('Y-m-d') : '' }}</td>
+                        <td class="btn-rc uk-position-bottom-right">
+                            <a class="btn-red" type="button" href="{{ path('app_qcm_show', {'id': qcm.id}) }}">show</a>
+                            {% if is_granted("ROLE_ADMIN") %}
+                            <a class="btn-blue" type="button" href="{{ path('app_qcm_edit', {'id': qcm.id}) }}">edit</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% if is_granted("ROLE_ADMIN") %}
+            <a class="btn-red" href="{{ path('app_qcm_new') }}">Créer un QCM</a>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
 
